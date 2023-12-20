@@ -1,44 +1,30 @@
-//  created h1 tag, passed attribute to tag
-// const heading = React.createElement("h1", {id:"heading", xyz:"abc"}, "Hello world using React!"); 
-// created root using reactDom
-// const root = ReactDOM.createRoot(document.getElementById("root")); 
-// root.render(heading);
-// never ever thinks that when we do createElement it is creating the html tag or so, it only creates an object which becomes HTML which browsers can understands...
+import React from "react"
+import ReactDOM from "react-dom/client"
 
-// while doing renderring into DOM it converts into HTML and put it into DOM
-// let's check how to create nested HTML ElemenTags
-const parent = React.createElement(
-    "div",
-    {id:"parentDiv"},
-    [React.createElement(
-        "div",
-        {id:"subParent1"},[
-        React.createElement(
-            "h1",
-            {id:"child1"},
-            "Inside H1 Tag"
-        ), 
-        React.createElement(
-            "h2",
-            {id:"h2Tag"},
-            "Inside H2 Tag"
-        )]
-    ),
-    React.createElement(
-        "div",
-        {id:"subParent2"},[
-        React.createElement(
-            "h1",
-            {id:"child2"},
-            "Inside H1 Tag"
-        ), 
-        React.createElement(
-            "h2",
-            {id:"h2Tag"},
-            "Inside H2 Tag"
-        )]
-    )]
+//React Elements
+// const jsxHeading = (<h1 id="heading" tabIndex="5">
+//     Namaste React using JSX</h1>);
+
+
+// React Component -> it should be in CapitalLetter
+
+const Title = () =>(
+    <h2>HungerHub</h2>
 );
-const root1 = ReactDOM.createRoot(document.getElementById("root"));
-console.log(parent);
-root1.render(parent);
+
+const title =(
+    <h1 className="head">React Element</h1>
+);
+const age=25;
+const HeadingComponent = () =>(
+    <div id="container">
+        <Title />
+        <h2>{age+10}</h2>
+        {title}
+        {console.log("you can write any js code here")}
+        <h1 className="heading"> HungerHub! Functional Components</h1>
+    </div>
+);
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(<HeadingComponent/>);
