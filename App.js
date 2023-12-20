@@ -1,30 +1,43 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
+/**
+ * Header
+ * - LOGO
+ * - NavBar
+ * Body
+ * - Search
+ * - RestarantContainer
+ * - RestuarantCard
+ * Footer 
+ * -CopyRight
+ * -Links
+ * -Address
+ * -Contact
+ */
 
-//React Elements
-// const jsxHeading = (<h1 id="heading" tabIndex="5">
-//     Namaste React using JSX</h1>);
-
-
-// React Component -> it should be in CapitalLetter
-
-const Title = () =>(
-    <h2>HungerHub</h2>
-);
-
-const title =(
-    <h1 className="head">React Element</h1>
-);
-const age=25;
-const HeadingComponent = () =>(
-    <div id="container">
-        <Title />
-        <h2>{age+10}</h2>
-        {title}
-        {console.log("you can write any js code here")}
-        <h1 className="heading"> HungerHub! Functional Components</h1>
+const Header = () =>{
+    return (<div className="header">
+        <div className="logo-container">
+            <img className="logo" src="logo.png" alt="Logo" />
+        </div>
+        <div className="nav-items">
+            <ul>
+                <li>Home</li>
+                <li>About Us</li>
+                <li>Contact Us</li>
+                <li>cart</li>
+            </ul>
+        </div>
     </div>
-);
+    );
+}
+const Applayout = () =>{
+    return <div className="app"> 
+        <Header />
+    </div>;
+};
+
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(<HeadingComponent/>);
+root.render(<Applayout />);
