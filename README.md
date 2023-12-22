@@ -27,3 +27,4 @@ BiteBoutique
  Named export/import
 
  export const Component
+ import {Component} "path"
