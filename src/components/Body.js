@@ -1,9 +1,14 @@
 import RestuarantCard from "./RestuarantCard";
 import resList from "../utils/mockData";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Body = () => {
     const [listOfRes , setListOfRestuarant] = useState(resList);
+
+    useEffect(()=>{
+        console.log("useEffect called");
+    }, []);
+    console.log("renderrring body");
     /**
      * it can also be done the below way:
      * - const arr = useState(resList);
@@ -17,7 +22,7 @@ const Body = () => {
             className="filter-btn"
             onClick={() => {
               const filteredRes = listOfRes.filter(
-                (res) => res.info.avgRating > 4.2
+                (res) => res.info.avgRating > 4.5
               );
               console.log(filteredRes);
               setListOfRestuarant(filteredRes);
