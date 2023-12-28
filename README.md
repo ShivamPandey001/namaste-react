@@ -28,3 +28,13 @@ BiteBoutique
 
  export const Component
  import {Component} "path"
+
+#finding the Path
+ if no dependency array, which means useEffect will be called every render
+ if there is empty dependency array -> useEffect will be called only once at the time of rendering i.e. when the component is called.
+
+ #Finding the Path..
+
+ # need to explore:-
+  - OptionalChaining
+
