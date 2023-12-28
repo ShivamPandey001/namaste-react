@@ -1,0 +1,18 @@
+import { useRouteError } from "react-router-dom";
+
+const Error = () =>{
+    const err = useRouteError();
+    console.log(err);
+    return(
+    <div>
+        <h1>
+            {err.data}
+        </h1>
+        <h2>{err.status}: {err.statusText}</h2>
+        <h2>Shivam Pls provide correct path</h2>
+        
+    </div>
+    )
+};
+
+export default Error;
