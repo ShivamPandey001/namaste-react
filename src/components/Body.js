@@ -2,7 +2,8 @@ import RestuarantCard from "./RestuarantCard";
 import { useState, useEffect } from "react";
 import ShimmerUi from "./ShimmerUi";
 import { Link } from "react-router-dom";
-
+import useOnlineStatus from "../utils/useOnlineStatus";
+import OfflineStatus from "./OfflineStatus";
 const Body = () => {
     const [listOfRes , setListOfRestuarant] = useState([]);
     const [searchText, setSearchText] = useState("");
@@ -26,6 +27,10 @@ const Body = () => {
     }
     
     console.log("renderrring body");
+    const onlineStatus = useOnlineStatus();
+    console.log(onlineStatus);
+    if(onlineStatus === false) return <OfflineStatus />
+
     /**
      * it can also be done the below way:
      * - const arr = useState(resList);

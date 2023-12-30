@@ -1,21 +1,12 @@
-import { useEffect, useState } from "react";
 import ShimmerUi from "./ShimmerUi";
-import { MENU_API } from "../utils/constants";
 import { useParams } from "react-router-dom";
+import useRestuarantMenu from "../utils/useRestuarantMenu";
 
 const Restuarants = () => {
-  // when my page loads, i have to fetch it from Swiggy's api, so using useEffect below
-  useEffect(() => {
-    fetchMenu();
-  }, []);
-  const [resInfo, setResInfo] = useState(null);
+  
   // i'm desctucturing it ryt away, to resId
   const {resId} = useParams();
-  const fetchMenu = async () => {
-    const data = await fetch( MENU_API + resId);
-    const json = await data.json();
-    setResInfo(json?.data);
-  };
+  const resInfo = useRestuarantMenu(resId);
 
   if (resInfo === null) return <ShimmerUi />;
 

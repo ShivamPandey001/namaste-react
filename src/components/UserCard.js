@@ -8,9 +8,15 @@ export const UserCard = (props) =>{
     // what will happen if we create a setInterval inside my useEffect ?? and how we can cleanup the mess? just by passing the return statemenr and writing the code of clearInterval
 
     useEffect(()=>{
-        setInterval(()=>{
+        const timer = setInterval(()=>{
             console.log("useEffect")
-        },1000);   
+        },1000); 
+        
+        // it is for cleaning mess, it will only be called if you switch to other page 
+
+        return () =>{
+            clearInterval(timer);
+        }
     },[]);
 
     return (
