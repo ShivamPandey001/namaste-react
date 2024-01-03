@@ -10,7 +10,7 @@ const Error = () =>{
         </h1>
         <h2>{err.status}: {err.statusText}</h2>
         <h2>Shivam Pls provide correct path</h2>
-        
+         
     </div>
     )
 };
