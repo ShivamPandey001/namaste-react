@@ -38,3 +38,14 @@ BiteBoutique
  # need to explore:-
   - OptionalChaining
 
+  // if we wrap it with Header only, our header will only be able to see the updated value, else where the defaultValue will be there
+  // return (
+    
+  //     <div className="app">
+  //       <UserContext.Provider value ={{loggedInUser: userName}}>
+  //       <Header />
+  //       </UserContext.Provider>
+  //       <Outlet />
+  //     </div>
+   
+  // );

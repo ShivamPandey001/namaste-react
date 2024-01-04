@@ -1,14 +1,36 @@
-import RestuarantCard from "./RestuarantCard";
-import { useState, useEffect } from "react";
+import RestuarantCard, {withPromotedLabel} from "./RestuarantCard";
+import { useState, useEffect, useContext } from "react";
 import ShimmerUi from "./ShimmerUi";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import OfflineStatus from "./OfflineStatus";
+import UserContext from "../utils/UserContext";
 const Body = () => {
   const [listOfRes, setListOfRestuarant] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filteredRes, setFilteredRes] = useState([]);
+  const PromotedRestuarant = withPromotedLabel(RestuarantCard);
 
+  // console.log(PromotedRestuarant);
+  /**
+ * we can pass the highOrdered function as below
+ * 
+ * restuarant.data.promoted? <PromotedRestuarant resData={restuarant}/> : <RestuarantCard resData={restuarant} />
+ * we are passing the props here but where we will be recive it? 
+ * 
+ * below
+ *   export const withPromotedLabel = (RestuarantCard) =>{
+    return () => {
+      return(
+      <div>
+        <label>Promoted</label>
+        <RestuarantCard />
+      </div>
+      );
+    };
+  }
+ * 
+ */
   useEffect(() => {
     fetchData();
   }, []);
@@ -33,7 +55,6 @@ const Body = () => {
         card?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
 
-    console.log(cardIndex);
 
     if (cardIndex !== -1) {
       setListOfRestuarant(
@@ -45,7 +66,6 @@ const Body = () => {
     }
   };
 
-  console.log("renderrring body");
   const onlineStatus = useOnlineStatus();
   console.log(onlineStatus);
   if (onlineStatus === false) return <OfflineStatus />;
@@ -56,6 +76,9 @@ const Body = () => {
    * - const listOfRes = arr[0];
    * - const setListOfRestuarant = arr[1];
    */
+
+   const { loggedInUser,setUserName} = useContext(UserContext);
+
   return !listOfRes || listOfRes.length === 0 ? (
     <ShimmerUi />
   ) : (
@@ -63,13 +86,14 @@ const Body = () => {
       <div className="flex">
         <div className="m-4 p-4">
           <input
-            className="border border-solid border-black"
+            className="border border-solid border-black rounded-lg"
             type="text"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
+
           <button
             className="px-4 bg-green-100 py-0.5 m-4 rounded-xl"
             onClick={() => {
@@ -88,6 +112,7 @@ const Body = () => {
             Search
           </button>
         </div>
+
         <div className="p-4 m-4 flex items-center">
           <button
             className="px-4 bg-gray-100 py-0.5 rounded-xl"
@@ -102,14 +127,28 @@ const Body = () => {
             Top Rated Restuarants
           </button>
         </div>
+
+        <div className="p-2 m-2 flex items-center">
+          <label className="p-2">UserName: </label>
+          <input
+            className="border border-black rounded-lg "
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </div>
       </div>
       <div className="flex flex-wrap bg-yellow-100">
+        {console.log(filteredRes)}
         {filteredRes.map((restuarant) => (
           <Link
             key={restuarant.info.id}
             to={"/restuarants/" + restuarant.info.id}
           >
-            <RestuarantCard resData={restuarant} />{" "}
+            {restuarant.info.avgRating > 4.5 ? (
+              <PromotedRestuarant resData={restuarant} />
+            ) : (
+              <RestuarantCard resData={restuarant} />
+            )}
           </Link>
         ))}
       </div>
