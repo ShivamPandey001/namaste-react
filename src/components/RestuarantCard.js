@@ -1,11 +1,10 @@
 import { CON_URL } from "../utils/constants";
-
-const styleCard = {
-    backgroundColor: "#f0f0f0",
-};
+import UserContext from "../utils/UserContext";
+import { useContext } from "react";
 
 const RestuarantCard = (props) => {
     const { resData } = props;
+    const {loggedInUser} = useContext(UserContext);
       const {
         cloudinaryImageId,
         name,
@@ -26,8 +25,21 @@ const RestuarantCard = (props) => {
         <h4>{avgRating}</h4>
         <h4>{deliveryTime} mins</h4>
         <h4>{costForTwo}</h4>
+        <h4>User: {loggedInUser}</h4>
       </div>
     );
+  };
+
+  export const withPromotedLabel = (RestuarantCard) =>{
+    return (props) => {
+      return(
+      <div>
+        {console.log("withPromotedLabel")}
+        <label className="absolute bg-black text-white m-2 p-2 rounded-lg">Promoted</label>
+        <RestuarantCard {...props}/>
+      </div>
+      );
+    };
   };
 
   export default RestuarantCard;
